@@ -30,7 +30,7 @@ const Projects: React.FC<ProjectsProps> = ({ activeProjectTitle, setActiveProjec
       github: 'https://github.com/itsmeLan/i4c-website',
       demo: 'https://i4c-website-frontend.vercel.app',
       image: i4cImg,
-      details: 'This application utilizes complex transaction management, persistent user shopping cart state caching, secure checkout through Stripe API integrations, and robust password hashing with JWT auth systems.'
+      details: 'This application utilizes complex transaction management, persistent user shopping cart state caching, secure checkout through Stripe API integrations, and robust password hashing with[...]'
     },
     {
       title: 'Inventory and Order Management System',
@@ -40,25 +40,17 @@ const Projects: React.FC<ProjectsProps> = ({ activeProjectTitle, setActiveProjec
       github: 'https://github.com/itsmeLan/UA-Project',
       demo: 'https://ua-project-opal.vercel.app',
       image: inventoryImg,
-      details: 'Features structural state binding via reactive Firestore document listeners, drag-and-drop workflow updates, sub-task breakdowns, interactive user roles, and team activity audit logs.'
+      details: 'Features structural state binding via reactive Firestore document listeners, drag-and-drop workflow updates, sub-task breakdowns, interactive user roles, and team activity audit lo[...]'
     },
     {
       title: 'Rise Fitness Hub Cebu',
       category: 'Full Stack',
-<<<<<<< HEAD
-      description: 'Custom content management system for creative professionals to showcase their work.',
-      tags: ['Next.js', 'TypeScript', 'Prisma'],
-      github: 'https://github.com/itsmeLan/Rise-Fitness-Website',
-      demo: 'https://rise-fitness-website.vercel.app',
-      image: gymIMG,
-=======
       description: 'Fitness gym website with a realtime Dashboard',
       tags: ['Firebase', 'TypeScript', 'React', 'Tailwind CSS'],
       github: 'https://github.com/itsmeLan/Rise-Fitness-Website',
       demo: 'https://rise-fitness-website.vercel.app',
-      image: cmsImg,
->>>>>>> 58f019ef2ef855ccb54a7c402bc2d3d1c6b3b423
-      details: 'Equipped with a modern Rich Text Editor rendering raw markdown output, automatic layout optimization engines, customizable database schema migrations, and optimized content delivery delivery pipelines.'
+      image: gymIMG,
+      details: 'Equipped with a modern Rich Text Editor rendering raw markdown output, automatic layout optimization engines, customizable database schema migrations, and optimized content deliver[...]'
     },
     
   ];
