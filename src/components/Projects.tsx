@@ -6,11 +6,9 @@ import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 
 import ecommerceImg from '@/assets/ecommerce.png';
-import taskImg from '@/assets/task.png';
-import cmsImg from '@/assets/cms.png';
-import weatherImg from '@/assets/weather.png';
-import socialImg from '@/assets/social.png';
-import blogImg from '@/assets/blog.png';
+import i4cImg from '@/assets/i4cIMG.png';
+import inventoryImg from '@/assets/inventoryIMG.png';
+import gymIMG from '@/assets/gymIMG.png';
 
 interface ProjectsProps {
   activeProjectTitle?: string | null;
@@ -31,7 +29,7 @@ const Projects: React.FC<ProjectsProps> = ({ activeProjectTitle, setActiveProjec
       tags: ['React', 'Node.js', 'MongoDB', 'Stripe'],
       github: 'https://github.com/itsmeLan/i4c-website',
       demo: 'https://i4c-website-frontend.vercel.app',
-      image: ecommerceImg,
+      image: i4cImg,
       details: 'This application utilizes complex transaction management, persistent user shopping cart state caching, secure checkout through Stripe API integrations, and robust password hashing with JWT auth systems.'
     },
     {
@@ -41,7 +39,7 @@ const Projects: React.FC<ProjectsProps> = ({ activeProjectTitle, setActiveProjec
       tags: ['React', 'Tailwind CSS',  'MongoDB',  'Javascript'],
       github: 'https://github.com/itsmeLan/UA-Project',
       demo: 'https://ua-project-opal.vercel.app',
-      image: taskImg,
+      image: inventoryImg,
       details: 'Features structural state binding via reactive Firestore document listeners, drag-and-drop workflow updates, sub-task breakdowns, interactive user roles, and team activity audit logs.'
     },
     {
@@ -49,41 +47,12 @@ const Projects: React.FC<ProjectsProps> = ({ activeProjectTitle, setActiveProjec
       category: 'Full Stack',
       description: 'Custom content management system for creative professionals to showcase their work.',
       tags: ['Next.js', 'TypeScript', 'Prisma'],
-      github: 'https://github.com',
-      demo: 'https://demo.com',
-      image: cmsImg,
+      github: 'https://github.com/itsmeLan/Rise-Fitness-Website',
+      demo: 'https://rise-fitness-website.vercel.app',
+      image: gymIMG,
       details: 'Equipped with a modern Rich Text Editor rendering raw markdown output, automatic layout optimization engines, customizable database schema migrations, and optimized content delivery delivery pipelines.'
     },
-    {
-      title: 'Weather Dashboard',
-      category: 'Frontend',
-      description: 'Real-time weather tracking with interactive maps, forecasts, and location-based alerts.',
-      tags: ['React', 'Weather API', 'Chart.js'],
-      github: 'https://github.com',
-      demo: 'https://demo.com',
-      image: weatherImg,
-      details: 'Processes multiple geo-coordinates instantly, charts humidity/temperature cycles over multi-day periods using Chart.js, tracks UV indices, and stores user preferred locations locally.'
-    },
-    {
-      title: 'Social Media App',
-      category: 'Full Stack',
-      description: 'Feature-rich social platform with posts, comments, likes, and real-time notifications.',
-      tags: ['React', 'Node.js', 'Socket.io', 'PostgreSQL'],
-      github: 'https://github.com',
-      demo: 'https://demo.com',
-      image: socialImg,
-      details: 'Leverages WebSockets to push direct message flows and post notification triggers instantaneously. Contains image post uploads, nested reply architecture, and algorithmic search parsing.'
-    },
-    {
-      title: 'Blog Platform',
-      category: 'Frontend',
-      description: 'Modern blogging platform with markdown support, SEO optimization, and comment system.',
-      tags: ['React', 'Node.js', 'MongoDB', 'Express'],
-      github: 'https://github.com',
-      demo: 'https://demo.com',
-      image: blogImg,
-      details: 'SEO metadata generation engine featuring clean static routing paradigms, tag classification hubs, rich syntax highlighting components, and anti-spam filtered comment submissions.'
-    },
+    
   ];
 
   useEffect(() => {

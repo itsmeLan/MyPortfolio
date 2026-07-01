@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # My Portfolio
 
 Personal portfolio website for **Lan** — web developer.
@@ -69,7 +68,3 @@ Build the site with `npm run build` and deploy the `dist` folder to any static h
 ## License
 
 © Lan. All rights reserved.
-=======
-# MyPortfolio
-project stoarge
->>>>>>> 8a16fbc5327b31711d1bde149ca89911b481c653
