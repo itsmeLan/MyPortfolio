@@ -16,7 +16,45 @@ const Projects: React.FC<ProjectsProps> = ({ activeProjectTitle, setActiveProjec
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
   const [activeFilter, setActiveFilter] = useState<'All' | 'Full Stack' | 'Frontend'>('All');
+<<<<<<< HEAD
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+=======
+  const [selectedProject, setSelectedProject] = useState<any | null>(null);
+
+  const projects = [
+    {
+      title: 'i4C Construction Website',
+      category: 'Full Stack',
+      description: 'A full-stack construction website with admin dashboard.',
+      tags: ['React', 'Node.js', 'MongoDB', 'Stripe'],
+      github: 'https://github.com/itsmeLan/i4c-website',
+      demo: 'https://i4c-website-frontend.vercel.app',
+      image: i4cImg,
+      details: 'This application utilizes complex transaction management, persistent user shopping cart state caching, secure checkout through Stripe API integrations, and robust password hashing with[...]'
+    },
+    {
+      title: 'Inventory and Order Management System',
+      category: 'Full Stack',
+      description: 'This is a personal project that i built for a famous local clothing brand in cebu called Underground Apparel.',
+      tags: ['React', 'Tailwind CSS',  'MongoDB',  'Javascript'],
+      github: 'https://github.com/itsmeLan/UA-Project',
+      demo: 'https://ua-project-opal.vercel.app',
+      image: inventoryImg,
+      details: 'Features structural state binding via reactive Firestore document listeners, drag-and-drop workflow updates, sub-task breakdowns, interactive user roles, and team activity audit lo[...]'
+    },
+    {
+      title: 'Rise Fitness Hub Cebu',
+      category: 'Full Stack',
+      description: 'Fitness gym website with a realtime Dashboard',
+      tags: ['Firebase', 'TypeScript', 'React', 'Tailwind CSS'],
+      github: 'https://github.com/itsmeLan/Rise-Fitness-Website',
+      demo: 'https://rise-fitness-website.vercel.app',
+      image: gymIMG,
+      details: 'Equipped with a modern Rich Text Editor rendering raw markdown output, automatic layout optimization engines, customizable database schema migrations, and optimized content deliver[...]'
+    },
+    
+  ];
+>>>>>>> 85860f19764fc297e1720b4abd430c35bc26b599
 
   useEffect(() => {
     if (activeProjectTitle) {
