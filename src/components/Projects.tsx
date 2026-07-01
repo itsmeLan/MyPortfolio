@@ -5,10 +5,7 @@ import { ExternalLink, Github } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 
-import ecommerceImg from '@/assets/ecommerce.png';
-import i4cImg from '@/assets/i4cIMG.png';
-import inventoryImg from '@/assets/inventoryIMG.png';
-import gymIMG from '@/assets/gymIMG.png';
+import { projects, type Project } from '@/data/projects';
 
 interface ProjectsProps {
   activeProjectTitle?: string | null;
@@ -19,49 +16,7 @@ const Projects: React.FC<ProjectsProps> = ({ activeProjectTitle, setActiveProjec
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
   const [activeFilter, setActiveFilter] = useState<'All' | 'Full Stack' | 'Frontend'>('All');
-  const [selectedProject, setSelectedProject] = useState<any | null>(null);
-
-  const projects = [
-    {
-      title: 'i4C Construction Website',
-      category: 'Full Stack',
-      description: 'A full-stack construction website with admin dashboard.',
-      tags: ['React', 'Node.js', 'MongoDB', 'Stripe'],
-      github: 'https://github.com/itsmeLan/i4c-website',
-      demo: 'https://i4c-website-frontend.vercel.app',
-      image: i4cImg,
-      details: 'This application utilizes complex transaction management, persistent user shopping cart state caching, secure checkout through Stripe API integrations, and robust password hashing with JWT auth systems.'
-    },
-    {
-      title: 'Inventory and Order Management System',
-      category: 'Full Stack',
-      description: 'This is a personal project that i built for a famous local clothing brand in cebu called Underground Apparel.',
-      tags: ['React', 'Tailwind CSS',  'MongoDB',  'Javascript'],
-      github: 'https://github.com/itsmeLan/UA-Project',
-      demo: 'https://ua-project-opal.vercel.app',
-      image: inventoryImg,
-      details: 'Features structural state binding via reactive Firestore document listeners, drag-and-drop workflow updates, sub-task breakdowns, interactive user roles, and team activity audit logs.'
-    },
-    {
-      title: 'Rise Fitness Hub Cebu',
-      category: 'Full Stack',
-<<<<<<< HEAD
-      description: 'Custom content management system for creative professionals to showcase their work.',
-      tags: ['Next.js', 'TypeScript', 'Prisma'],
-      github: 'https://github.com/itsmeLan/Rise-Fitness-Website',
-      demo: 'https://rise-fitness-website.vercel.app',
-      image: gymIMG,
-=======
-      description: 'Fitness gym website with a realtime Dashboard',
-      tags: ['Firebase', 'TypeScript', 'React', 'Tailwind CSS'],
-      github: 'https://github.com/itsmeLan/Rise-Fitness-Website',
-      demo: 'https://rise-fitness-website.vercel.app',
-      image: cmsImg,
->>>>>>> 58f019ef2ef855ccb54a7c402bc2d3d1c6b3b423
-      details: 'Equipped with a modern Rich Text Editor rendering raw markdown output, automatic layout optimization engines, customizable database schema migrations, and optimized content delivery delivery pipelines.'
-    },
-    
-  ];
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   useEffect(() => {
     if (activeProjectTitle) {
@@ -95,7 +50,7 @@ const Projects: React.FC<ProjectsProps> = ({ activeProjectTitle, setActiveProjec
         </motion.div>
 
         {/* Dynamic sliding category filter tab selector */}
-        <div className="flex justify-center gap-4 mb-16">
+        <div className="flex flex-wrap justify-center gap-2 sm:gap-4 mb-10 sm:mb-16 px-1">
           {filters.map((filter) => (
             <button
               key={filter}
@@ -134,22 +89,23 @@ const Projects: React.FC<ProjectsProps> = ({ activeProjectTitle, setActiveProjec
                 onClick={() => setSelectedProject(project)}
               >
                 {/* Visual mockup graphics assets containers */}
-                <div className="h-48 overflow-hidden relative">
+                <div className="h-44 sm:h-48 overflow-hidden relative">
                   <img 
                     src={project.image} 
                     alt={project.title} 
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full object-cover md:group-hover:scale-105 transition-transform duration-500"
                   />
-                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                    <span className="text-white text-xs font-semibold bg-primary/90 px-3 py-1.5 rounded-full backdrop-blur-sm">
+                  {/* Always visible on touch/mobile; hover reveal on pointer devices */}
+                  <div className="absolute inset-0 bg-black/40 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                    <span className="text-xs sm:text-sm font-semibold text-white bg-black/85 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full backdrop-blur-sm border border-white/30 shadow-lg">
                       Read Project Specs
                     </span>
                   </div>
                 </div>
 
-                <div className="p-6">
-                  <div className="flex justify-between items-center mb-3">
-                    <h3 className="text-xl font-semibold text-foreground">{project.title}</h3>
+                <div className="p-4 sm:p-6">
+                  <div className="flex justify-between items-start gap-2 mb-3">
+                    <h3 className="text-lg sm:text-xl font-semibold text-foreground leading-snug">{project.title}</h3>
                     <span className="text-[10px] bg-secondary border border-border px-2 py-0.5 rounded-full text-muted-foreground">
                       {project.category}
                     </span>
@@ -172,6 +128,10 @@ const Projects: React.FC<ProjectsProps> = ({ activeProjectTitle, setActiveProjec
                       </span>
                     )}
                   </div>
+
+                  <p className="text-xs font-medium text-foreground/80 md:hidden">
+                    Tap to read project specs →
+                  </p>
                 </div>
               </motion.div>
             ))}
@@ -182,21 +142,23 @@ const Projects: React.FC<ProjectsProps> = ({ activeProjectTitle, setActiveProjec
       {/* Premium spec/preview lightbox Dialog */}
       <Dialog open={!!selectedProject} onOpenChange={(open) => !open && setSelectedProject(null)}>
         {selectedProject && (
-          <DialogContent className="max-w-2xl bg-card border-border sm:rounded-xl">
+          <DialogContent className="w-[calc(100%-1.5rem)] max-w-2xl max-h-[90dvh] overflow-y-auto bg-card border-border p-4 sm:p-6 sm:rounded-xl landscape:max-h-[92dvh]">
             <DialogHeader>
-              <div className="flex justify-between items-center border-b border-border pb-3">
-                <DialogTitle className="text-2xl font-bold">{selectedProject.title}</DialogTitle>
-                <span className="text-xs bg-secondary border border-border px-3 py-1 rounded-full text-foreground">
+              <div className="flex flex-col gap-2 sm:flex-row sm:justify-between sm:items-start border-b border-border pb-3 pr-8">
+                <DialogTitle className="text-lg sm:text-2xl font-bold leading-snug text-left">
+                  {selectedProject.title}
+                </DialogTitle>
+                <span className="w-fit shrink-0 text-xs bg-secondary border border-border px-3 py-1 rounded-full text-foreground">
                   {selectedProject.category}
                 </span>
               </div>
-              <DialogDescription className="text-muted-foreground mt-4 text-base leading-relaxed">
+              <DialogDescription className="text-muted-foreground mt-3 sm:mt-4 text-sm sm:text-base leading-relaxed text-left">
                 {selectedProject.description}
               </DialogDescription>
             </DialogHeader>
 
             {/* Large screenshot preview */}
-            <div className="w-full h-64 rounded-lg overflow-hidden border border-border mt-4">
+            <div className="w-full h-40 sm:h-56 landscape:h-36 rounded-lg overflow-hidden border border-border mt-3 sm:mt-4">
               <img 
                 src={selectedProject.image} 
                 alt={selectedProject.title} 
@@ -205,7 +167,7 @@ const Projects: React.FC<ProjectsProps> = ({ activeProjectTitle, setActiveProjec
             </div>
 
             {/* Spec breakdown details */}
-            <div className="mt-6 space-y-4">
+            <div className="mt-4 sm:mt-6 space-y-4">
               <div>
                 <h4 className="text-sm font-semibold text-foreground mb-2">Detailed Overview</h4>
                 <p className="text-sm text-muted-foreground leading-relaxed">{selectedProject.details}</p>
@@ -227,10 +189,10 @@ const Projects: React.FC<ProjectsProps> = ({ activeProjectTitle, setActiveProjec
             </div>
 
             {/* Direct buttons */}
-            <div className="flex gap-4 mt-8 border-t border-border pt-4">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-6 sm:mt-8 border-t border-border pt-4">
               <Button
                 variant="outline"
-                className="flex-1 border-border hover:border-primary hover:bg-transparent"
+                className="w-full sm:flex-1 border-border hover:border-primary hover:bg-transparent"
                 asChild
               >
                 <a href={selectedProject.github} target="_blank" rel="noopener noreferrer">
@@ -239,7 +201,7 @@ const Projects: React.FC<ProjectsProps> = ({ activeProjectTitle, setActiveProjec
                 </a>
               </Button>
               <Button
-                className="flex-1 bg-primary text-primary-foreground hover:bg-primary/90"
+                className="w-full sm:flex-1 bg-primary text-primary-foreground hover:bg-primary/90"
                 asChild
               >
                 <a href={selectedProject.demo} target="_blank" rel="noopener noreferrer">

@@ -79,8 +79,8 @@ const Contact = () => {
 
   const socialLinks = [
     { icon: Github, href: 'https://github.com/itsmeLan', label: 'GitHub' },
-    { icon: Linkedin, href: 'https://linkedin.com', label: 'LinkedIn' },
-    { icon: Facebook, href: 'https://facebook.com', label: 'Facebook' },
+    { icon: Linkedin, href: 'https://www.linkedin.com/in/roland-abellanosa-441a28417', label: 'LinkedIn' },
+    { icon: Facebook, href: 'https://web.facebook.com/rolandsuico.abellanosa', label: 'Facebook' },
   ];
 
   return (

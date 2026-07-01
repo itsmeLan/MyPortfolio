@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Command } from 'cmdk';
 import { useTheme } from 'next-themes';
 import { Moon, Sun, ArrowRight, Folder, Mail, User, Terminal } from 'lucide-react';
+import { projects } from '@/data/projects';
 
 interface CommandPaletteProps {
   onOpenProject?: (projectTitle: string) => void;
@@ -38,15 +39,17 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ onOpenProject })
 
   return (
     <>
-      {/* Visual Keyboard trigger indicator helper floating at bottom-right of viewport */}
+      {/* Browse trigger — tap on mobile, ⌘K hint on desktop */}
       <div 
         onClick={() => setOpen(true)}
-        className="fixed bottom-6 right-6 z-40 bg-card hover:bg-secondary border border-border rounded-full py-2.5 px-4 shadow-lg flex items-center gap-2 cursor-pointer transition-all duration-300 hover:scale-105 active:scale-95 text-xs text-muted-foreground select-none"
+        className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40 bg-card hover:bg-secondary border border-border rounded-full py-2.5 px-3 sm:px-4 shadow-lg flex items-center gap-2 cursor-pointer transition-all duration-300 hover:scale-105 active:scale-95 text-xs text-muted-foreground select-none max-w-[calc(100vw-2rem)]"
+        style={{ paddingBottom: 'max(0.625rem, env(safe-area-inset-bottom))' }}
       >
-        <Terminal size={14} className="text-primary animate-pulse" />
-        <span>Press</span>
-        <kbd className="bg-muted px-1.5 py-0.5 rounded text-[10px] font-mono border border-border">⌘K</kbd>
-        <span>to browse</span>
+        <Terminal size={14} className="text-primary animate-pulse shrink-0" />
+        <span className="sm:hidden font-medium text-foreground">Browse site</span>
+        <span className="hidden sm:inline">Press</span>
+        <kbd className="hidden sm:inline bg-muted px-1.5 py-0.5 rounded text-[10px] font-mono border border-border">⌘K</kbd>
+        <span className="hidden sm:inline">to browse</span>
       </div>
 
       <Command.Dialog
@@ -54,26 +57,27 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ onOpenProject })
         onOpenChange={setOpen}
         label="Global Command Menu"
         container={document.body}
-        className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-xs transition-opacity duration-300"
+        className="fixed inset-0 z-50 flex items-start sm:items-center justify-center p-3 sm:p-4 pt-[max(0.75rem,env(safe-area-inset-top))] pb-[max(0.75rem,env(safe-area-inset-bottom))] bg-black/40 backdrop-blur-xs transition-opacity duration-300 landscape:items-start landscape:pt-2"
         overlayClassName="fixed inset-0 bg-black/60 backdrop-blur-xs"
       >
-        <div className="w-full max-w-xl bg-card border border-border rounded-xl shadow-2xl overflow-hidden animate-scale-in">
+        <div className="w-full max-w-xl bg-card border border-border rounded-xl shadow-2xl overflow-hidden animate-scale-in max-h-[calc(100dvh-1.5rem)] flex flex-col landscape:max-h-[calc(100dvh-1rem)]">
           {/* Input field */}
-          <div className="flex items-center border-b border-border px-4 py-3">
+          <div className="flex items-center gap-2 border-b border-border px-3 sm:px-4 py-3 shrink-0">
             <Command.Input
-              placeholder="Search sections, projects, or settings..."
-              className="w-full bg-transparent border-0 text-foreground placeholder:text-muted-foreground text-sm focus:outline-none focus:ring-0"
+              placeholder="Search sections, projects..."
+              className="w-full min-w-0 bg-transparent border-0 text-foreground placeholder:text-muted-foreground text-sm focus:outline-none focus:ring-0"
               autoFocus
             />
             <button 
               onClick={() => setOpen(false)}
-              className="text-[10px] font-mono bg-secondary text-muted-foreground border border-border px-1.5 py-0.5 rounded"
+              className="shrink-0 text-[10px] font-mono bg-secondary text-muted-foreground border border-border px-1.5 py-0.5 rounded"
+              aria-label="Close menu"
             >
               ESC
             </button>
           </div>
 
-          <Command.List className="max-h-[300px] overflow-y-auto p-2 space-y-2">
+          <Command.List className="flex-1 min-h-0 max-h-[min(300px,55dvh)] sm:max-h-[300px] landscape:max-h-[min(220px,70dvh)] overflow-y-auto p-2 space-y-2 overscroll-contain">
             <Command.Empty className="py-6 text-center text-sm text-muted-foreground">
               No matching commands or actions found.
             </Command.Empty>
@@ -135,29 +139,23 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ onOpenProject })
 
             {/* Showcase Quick Search Group */}
             <Command.Group heading="Featured Projects Catalog" className="text-[10px] font-semibold text-muted-foreground px-2 py-1 uppercase tracking-wider mt-2 border-t border-border/40 pt-2">
-              {[
-                'E-Commerce Platform',
-                'Task Management App',
-                'Portfolio CMS',
-                'Weather Dashboard',
-                'Social Media App',
-                'Blog Platform',
-              ].map((projTitle) => (
+              {projects.map((project) => (
                 <Command.Item
-                  key={projTitle}
+                  key={project.title}
+                  value={project.title}
                   onSelect={() => runCommand(() => {
                     scrollToSection('projects');
                     if (onOpenProject) {
-                      setTimeout(() => onOpenProject(projTitle), 400);
+                      setTimeout(() => onOpenProject(project.title), 400);
                     }
                   })}
-                  className="flex items-center justify-between px-3 py-2.5 rounded-lg text-sm text-foreground hover:bg-secondary cursor-pointer select-none transition-colors data-[selected=true]:bg-secondary"
+                  className="flex items-center justify-between gap-2 px-3 py-2.5 rounded-lg text-sm text-foreground hover:bg-secondary cursor-pointer select-none transition-colors data-[selected=true]:bg-secondary"
                 >
-                  <div className="flex items-center gap-3">
-                    <Folder size={14} className="text-muted-foreground" />
-                    <span>{projTitle}</span>
+                  <div className="flex items-center gap-3 min-w-0">
+                    <Folder size={14} className="text-muted-foreground shrink-0" />
+                    <span className="truncate">{project.title}</span>
                   </div>
-                  <span className="text-[10px] text-muted-foreground">Trigger Preview</span>
+                  <span className="text-[10px] text-muted-foreground shrink-0 hidden sm:inline">Open Preview</span>
                 </Command.Item>
               ))}
             </Command.Group>
