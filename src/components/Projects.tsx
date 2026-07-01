@@ -49,7 +49,7 @@ const Projects: React.FC<ProjectsProps> = ({ activeProjectTitle, setActiveProjec
       category: 'Full Stack',
       description: 'Fitness gym website with a realtime Dashboard',
       tags: ['Firebase', 'TypeScript', 'React', 'Tailwind CSS'],
-      github: https://github.com/itsmeLan/Rise-Fitness-Website',
+      github: 'https://github.com/itsmeLan/Rise-Fitness-Website',
       demo: 'https://rise-fitness-website.vercel.app',
       image: cmsImg,
       details: 'Equipped with a modern Rich Text Editor rendering raw markdown output, automatic layout optimization engines, customizable database schema migrations, and optimized content delivery delivery pipelines.'
